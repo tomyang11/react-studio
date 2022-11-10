@@ -13,6 +13,7 @@ bakeryData.forEach((item) => {
 function App() {
 
   const [cart, setCart] = useState([]);
+  const [totalCost, setTotalCost] = useState(0);
 
 	const onAddItem = (newItem) => {
     const found = cart.find(({ name }) => name === newItem.name);
@@ -23,6 +24,8 @@ function App() {
         return [...cart, newItem];
       });
     }
+    
+    setTotalCost(totalCost+newItem.price);
   };
 
 	return (
@@ -44,7 +47,7 @@ function App() {
           ))}
         </ul>
       </div>
-			<div className="bg-emerald-400 w-1/2 flex justify-center items-start">
+			<div className="bg-emerald-400 w-1/2 flex flex-col justify-start items-center">
 				<h2>Cart</h2>
         <ul>
             {cart.map((cartItem) => (
@@ -55,6 +58,7 @@ function App() {
               </div>
             ))}
         </ul>
+        <h2>Total Cost: ${totalCost}</h2>
 			</div>
 		</div>
 	);
